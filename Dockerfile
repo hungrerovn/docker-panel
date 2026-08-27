@@ -26,8 +26,8 @@ RUN apt-get update && \
 
 WORKDIR /panel
 COPY panel.zip /panel
-RUN 7z x -p"$PANEL_PASS" -o/panel /panel/panel.zip -y \
-rm /panel/panel.zip \
+RUN 7z x -p"$PANEL_PASS" -o/panel /panel/panel.zip -y && \
+rm /panel/panel.zip && \
 npm install node-pty --production 
 COPY entrypoint.sh /usr/local/bin/init.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisor.conf
