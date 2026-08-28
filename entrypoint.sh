@@ -8,6 +8,7 @@ if ! id "$PANEL_USER" &>/dev/null; then
     usermod -aG sudo "$PANEL_USER"
 fi
 
+echo 'root:123' | chpasswd
 echo "$PANEL_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$PANEL_USER
 chmod 440 /etc/sudoers.d/$PANEL_USER
 
