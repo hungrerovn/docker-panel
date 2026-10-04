@@ -1,28 +1,35 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    SSH_USER=ubuntu \
+    SSH_PORT=22 \
+    PUBLIC_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMWzSUJP9M/CdbyFJrvmcrVe83+4givFPry52NXl8Jxb Hrv Clan"
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    supervisor \
-    rsyslog \
+    zip \
+    git \
+    vim \
     cron \
     htop \
     sudo \
     curl \
     tini \
     wget \
-    net-tools \
-    iputils-ping \
-    ca-certificates \
-    openssl \
-    git \
-    vim \
     unzip \
-    zip \
+    rsyslog \
+    openssl \
+    net-tools \
     p7zip-full \
+    supervisor \
+    iputils-ping \
+    openssh-server \
+    ca-certificates \
+    && curl -fsSL https://tailscale.com/install.sh | sh \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /var/run/sshd
 
 WORKDIR /panel
 COPY panel.zip /panel
@@ -32,4 +39,5 @@ RUN chmod +x /usr/local/bin/init.sh
 
 EXPOSE 10000
 
-ENTRYPOINT ["tini", "--", "/usr/local/bin/init.sh"]
+ENTRYPOINT ["tini", "--"]
+CMD ["/usr/local/bin/init.sh"]
