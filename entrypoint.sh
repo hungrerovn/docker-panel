@@ -42,7 +42,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 
 [program:tailscale]
-command=/usr/bin/tailscale up --authkey=${TAILSCALE_AUTHKEY}
+command=/usr/bin/tailscale up --authkey=${TAILSCALE_AUTHKEY} --advertise-exit-node
 priority=10
 autostart=true
 autorestart=false
