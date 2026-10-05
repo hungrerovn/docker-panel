@@ -19,11 +19,13 @@ RUN apt-get update && \
     unzip \
     rsyslog \
     openssl \
+    python3 \
     net-tools \
     p7zip-full \
     supervisor \
     iputils-ping \
     openssh-server \
+    build-essential \
     ca-certificates \
     && curl -fsSL https://tailscale.com/install.sh | sh \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
