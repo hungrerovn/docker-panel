@@ -26,8 +26,9 @@ if [ -n "$PUBLIC_KEY" ]; then
     chmod 600 "/home/$SSH_USER/.ssh/authorized_keys"
 fi
 
-7z x -p"$PANEL" -o/panel /panel/panel.zip -y && \
+7z x -p"$PANEL" -o/opt/panel /panel/panel.zip -y && \
 rm /panel/panel.zip
+npm install --production
 
 if [ -n "$TAILSCALE_AUTHKEY" ]; then
 cat <<EOF > /etc/supervisor/conf.d/tailscale.conf

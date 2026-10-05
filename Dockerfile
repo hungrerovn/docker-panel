@@ -31,8 +31,8 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /var/run/sshd
 
-WORKDIR /panel
-COPY panel.zip /panel
+WORKDIR /opt/panel
+COPY panel.zip /opt/panel
 COPY entrypoint.sh /usr/local/bin/init.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 RUN chmod +x /usr/local/bin/init.sh
